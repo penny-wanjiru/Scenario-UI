@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-ro
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {initialState, reducer} from './reducers/AuthReducer'
-import {ProtectedRoute} from './components/Protected'
+import {ProtectedRoute} from './components/ProtectedRoute'
 import { Header } from './components/Header';
 import Signup from './pages/Signup';
 import Login from './pages/Login';

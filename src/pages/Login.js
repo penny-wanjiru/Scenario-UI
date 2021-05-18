@@ -5,14 +5,13 @@ import {Form, Button} from 'react-bootstrap';
 import { Formik } from "formik";
 import {ValidationSchema} from '../schema/validation'
 
-import { Wrapper, FormWrapper, FormCard, Message, Heading , Group, SubmitButton, Paragraph} from "../styles/forms";
+import { Wrapper, FormCard, Message, Heading , Group, SubmitButton, Paragraph} from "../styles/forms";
 
 
 const Login = () => {
 
   return (
 		<Wrapper>
-			<FormWrapper>
 				<Formik
 					initialValues={{
 						email: 'init@gmail.com',
@@ -53,7 +52,6 @@ const Login = () => {
 						</FormCard>
 					)}
 				</Formik>
-			</FormWrapper>
 		</Wrapper>
   );
 }
