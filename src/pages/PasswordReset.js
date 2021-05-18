@@ -1,8 +1,7 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import {Form, Button} from 'react-bootstrap';
+import {Form} from 'react-bootstrap';
 
-import { Formik, Field } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
 
 import { Wrapper, FormWrapper, FormCard, Message, Heading , Group, SubmitButton, Paragraph} from "../styles/forms";
@@ -27,32 +26,30 @@ const Reset = () => {
         changepassword: ""
       }}
       validationSchema={ValidationSchema}
-      onSubmit={() => {}}
+      onSubmit={(values) => {console.log("faf",values)}}
     >
-      {({ values, errors, handleSubmit, handleChange, handleBlur }) => {
-        return (
-				<Wrapper>
-					<FormWrapper>
-					<FormCard>
-						<Heading>Reset password</Heading>
-						<Group controlId="formBasicPassword">
-							<Form.Label>Current Password</Form.Label>
-							<Form.Control type="password" placeholder="Password" onBlur={handleBlur} value={values.password} onChange={handleChange}/>
+		{( {values, errors, handleChange, handleBlur, handleSubmit, isSubmitting, isValid}) => (
+					<Wrapper>
+						<FormWrapper>
+						<FormCard onSubmit={handleSubmit}>
+							<Heading>Reset password</Heading>
+							<Group controlId="formBasicPassword">
+								<Form.Label>Current Password</Form.Label>
+								<Form.Control type="password" placeholder="Password" name="password" onBlur={handleBlur} value={values.password} onChange={handleChange}/>
+							</Group>
 							<Message name="bodyType" component="div" />
-						</Group>
-						<Group controlId="formBasicPassword">
-							<Form.Label>Password</Form.Label>
-							<Form.Control type="password" placeholder="ChangePassword" onBlur={handleBlur} value={values.password} onChange={handleChange}/>
+							<Group controlId="formBasicPassword">
+								<Form.Label>Password</Form.Label>
+								<Form.Control type="password" placeholder="ChangePassword" name="changepassword" onBlur={handleBlur} value={values.changepassword} onChange={handleChange}/>
+							</Group>
 							<Message name="bodyType" component="div" />
-						</Group>
-						<SubmitButton variant="primary" type="submit">
-							Reset
-						</SubmitButton>
-          </FormCard>
-					</FormWrapper>
-				</Wrapper>
-        );
-      }}
+							<SubmitButton variant="primary" type="submit">
+								Reset
+							</SubmitButton>
+	          </FormCard>
+						</FormWrapper>
+					</Wrapper>
+      )}
     </Formik>
   );
 }
