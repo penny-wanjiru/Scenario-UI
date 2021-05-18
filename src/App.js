@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-ro
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {initialState, reducer} from './reducers/AuthReducer'
+import {ProtectedRoute} from './components/Protected'
 import { Header } from './components/Header';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -22,7 +23,7 @@ const App = () => {
 				<Route exact path='/' component={Login} />
 				<Route exact path='/signup' component={Signup} />
 				<Route exact path='/reset' component={Reset} />
-				<Route exact path='/dashboard' component={Home} />
+				<ProtectedRoute exact path='/dashboard' component={Home} />
 			</Switch>
 		</AuthContext.Provider>
   );
