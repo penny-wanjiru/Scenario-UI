@@ -1,5 +1,5 @@
 import React from "react";
-import { LinK, useHistory} from "react-router-dom";
+import { Link, useHistory} from "react-router-dom";
 import {Form, Button} from 'react-bootstrap';
 
 import { Formik, Field } from "formik";
