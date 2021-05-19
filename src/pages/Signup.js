@@ -1,5 +1,5 @@
 import React from "react";
-import { Lin, useHistory} from "react-router-dom";
+import { LinK, useHistory} from "react-router-dom";
 import {Form, Button} from 'react-bootstrap';
 
 import { Formik, Field } from "formik";
@@ -11,6 +11,7 @@ import { Wrapper, FormCard, Message, Heading , Group, SubmitButton, Paragraph} f
 const Signup = () => {
 	const history = useHistory();
 	const { dispatch } = React.useContext(AuthContext);
+	const [serverErrors, setServerErrors] = React.useState( {errorStatus:null, errorMessage: null});
 
   return (
 		<Wrapper>
@@ -18,11 +19,9 @@ const Signup = () => {
 				initialValues={{
 					email: '',
 					password:'',
-					errorMessage: null
 				}}
 				validationSchema={ValidationSchema}
 				onSubmit={(values, {setSubmitting, setErrors, resetForm}) => {
-					console.log("This is being called")
 					fetch("https://hiring-example-25770.botics.co/rest-auth/registration/", {
 						method: "post",
 						headers: {
@@ -35,12 +34,12 @@ const Signup = () => {
 					})
 						.then(res => {
 							if (res.ok) {
-								console.log("this is the res", res);
 								return res.json();
 							}
 							throw res;
 						})
 						.then(resJson => {
+							setSubmitting(false)
 							dispatch({
 								type: "REGISTRATION",
 								payload: resJson
@@ -50,8 +49,13 @@ const Signup = () => {
 				      history.push('/dashboard');
 				    })
 						.catch(error => {
-							setErrors({errorMessage: error.message || error.statusText})
+							setSubmitting(false)
+							setServerErrors({
+	          		errorStatus: error.status || error.statusText,
+								errorMessage: "Validation Error: Enter correct details"
+	        		});
 						});
+
 				}}
 				>
 				{( {values, errors, handleChange, handleBlur, handleSubmit, isSubmitting, isValid}) => (
@@ -71,9 +75,11 @@ const Signup = () => {
 									{errors.password}
 								</span>
 							</Group>
-							{errors.errorMessage && (
-	              <span className="form-error">{errors.errorMessage}</span>
-	            )}
+							{serverErrors.errorStatus && (
+		            <span className="form-error" style={{ color: "red" }} >
+									{serverErrors.errorMessage}
+								</span>
+		        	)}
 							<SubmitButton variant="primary" type="submit">
 								{isSubmitting ? "Signing up..." : "SignUp"}
 							</SubmitButton>
