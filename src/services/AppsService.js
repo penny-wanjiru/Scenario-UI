@@ -1,33 +1,32 @@
-import http from "../http/http-common";
+import {apiGet} from './apiGateway.js';
 
-const getUser = () => {
-  return http.get("/rest-auth/user/");
+export const getAllApps = () => {
+  const url = '/api/v1/apps/';
+  return apiGet(url, 'get');
+}
+
+export const getApp = id => {
+  const url = `/api/v1/apps/${id}/`;
+	return apiGet(url, 'get');
 };
 
-const getAllApps = () => {
-  return http.get("/api/v1/apps/");
+export const createApp = data => {
+  const url = "/api/v1/apps/";
+	return apiGet(url, 'post', data);
 };
 
-const getApp = id => {
-  return http.get(`/api/v1/apps/${id}/`);
+export const updateApp = (id, data) => {
+  const url = `/api/v1/apps/${id}/`;
+	return apiGet(url, 'put', data);
+
 };
 
-const createApp = data => {
-  return http.post("/api/v1/apps/", data);
+export const deleteApp = (id, data) => {
+  const url = `/api/v1/apps/${id}/`;
+	return apiGet(url, 'get', data);
 };
 
-const updateApp = (id, data) => {
-  return http.put(`/api/v1/apps/${id}/`, data);
-};
-
-const patchApp = (id, data) => {
-  return http.put(`/api/v1/apps/${id}/`, data);
-};
-
-export default {
-  getAllApps,
-  getApp,
-  createApp,
-  updateApp,
-	patchApp
+export const patchApp = (id, data) => {
+  const url = `/api/v1/apps/${id}/`;
+	return apiGet(url, 'get', data);
 };
