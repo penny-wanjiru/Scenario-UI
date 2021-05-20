@@ -38,7 +38,7 @@ export const Heading = styled.h2`
 	margin-bottom: 2rem;
 `
 export const Group = styled(Form.Group)`
-	padding: 8px 0px 8px 0px;
+	/* padding: 8px 0px 8px 0px; */
 `
 
 export const SubmitButton = styled(Button)`

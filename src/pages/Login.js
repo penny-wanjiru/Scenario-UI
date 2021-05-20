@@ -35,11 +35,13 @@ const Login = () => {
 				})
 					.then(res => {
 						if (res.ok) {
+							console.log("getting user", res)
 							return res.json();
 						}
 						throw res;
 					})
 					.then(resJson => {
+						console.log("True response", resJson)
 						setSubmitting(false)
 						dispatch({
 							type: "LOGIN",

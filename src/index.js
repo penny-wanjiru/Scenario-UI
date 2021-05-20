@@ -18,6 +18,11 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     font-family: -apple-system, Ubuntu , BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;;
   }
+
+	button {
+		margin-bottom: 0 !important;
+		margin-right: .8rem;
+	}
 `;
 
 ReactDOM.render(

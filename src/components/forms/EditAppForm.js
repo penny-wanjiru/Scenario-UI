@@ -1,35 +1,38 @@
 import React, { useState, useEffect } from 'react'
 
-const EditUserForm = props => {
-  const [ user, setUser ] = useState(props.currentUser)
+const EditAppForm = props => {
+  const [ app, setApp ] = useState(props.currentApp)
 
-  useEffect(
-    () => {
-      setUser(props.currentUser)
-    },
-    [ props ]
-  )
+  // useEffect(
+  //   () => {
+  //     setApp(props.currentApp)
+  //   },
+  //   [ props ]
+  // )
   // You can tell React to skip applying an effect if certain values haven’t changed between re-renders. [ props ]
 
   const handleInputChange = event => {
     const { name, value } = event.target
 
-    setUser({ ...user, [name]: value })
+    setApp({ ...app, [name]: value })
   }
 
   return (
-    <form
-      onSubmit={event => {
-        event.preventDefault()
-
-        props.updateUser(user.id, user)
-      }}
-    >
+	    <form
+	      onSubmit={event => {
+	        event.preventDefault()
+	        props.updateApp(app.id, app)
+	      }}
+	    >
       <label>Name</label>
-      <input type="text" name="name" value={user.name} onChange={handleInputChange} />
-      <label>Username</label>
-      <input type="text" name="username" value={user.username} onChange={handleInputChange} />
-      <button>Update user</button>
+      <input type="text" name="name" value={app.name} onChange={handleInputChange} />
+      <label>Type</label>
+      <input type="text" name="type" value={app.type} onChange={handleInputChange} />
+			<label>Description</label>
+      <input type="text" name="desription" value={app.description} onChange={handleInputChange} />
+      <label>Framework</label>
+      <input type="text" name="framework" value={app.framework} onChange={handleInputChange} />
+      <button>Update App</button>
       <button onClick={() => props.setEditing(false)} className="button muted-button">
         Cancel
       </button>
@@ -37,4 +40,4 @@ const EditUserForm = props => {
   )
 }
 
-export default EditUserForm
+export default EditAppForm;
