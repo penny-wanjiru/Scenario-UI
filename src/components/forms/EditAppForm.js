@@ -21,7 +21,7 @@ const EditAppForm = props => {
 	    <form
 	      onSubmit={event => {
 	        event.preventDefault()
-	        props.updateApp(app.id, app)
+	        props.updateApplication(app.id, app)
 	      }}
 	    >
       <label>Name</label>

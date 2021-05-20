@@ -23,10 +23,10 @@ export const updateApp = (id, data) => {
 
 export const deleteApp = (id, data) => {
   const url = `/api/v1/apps/${id}/`;
-	return apiGet(url, 'get', data);
+	return apiGet(url, 'delete', data);
 };
 
-export const patchApp = (id, data) => {
-  const url = `/api/v1/apps/${id}/`;
-	return apiGet(url, 'get', data);
-};
+// export const patchApp = (id, data) => {
+//   const url = `/api/v1/apps/${id}/`;
+// 	return apiGet(url, 'patch', data);
+// };

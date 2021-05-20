@@ -38,7 +38,7 @@ const AppsTable = props => (
             Edit
           </Button>
 					<Button
-            onClick={() => props.deleteApp(app.id)}
+            onClick={() => props.deleteApplication(app.id)}
             className="button muted-button"
           >
             Delete

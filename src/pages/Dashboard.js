@@ -51,7 +51,7 @@ const Dashboard = () => {
 		setCurrentApp({ id: app.id, name: app.name, description: app.description, type: app.type, framework:app.framework})
 	}
 
-	const updateApps = (id, app) => {
+	const updateApplication = (id, app) => {
 		updateApp(id, app)
 		.then(res => {
 				console.log("Updated successfully", res)
@@ -61,11 +61,11 @@ const Dashboard = () => {
 		});
 	};
 
-	const deleteApps = (id, app) => {
+	const deleteApplication = (id, app) => {
 		deleteApp(id, app)
 		.then(res => {
-				console.log("Updated successfully", res)
-			})
+				console.log("Deleted successfully", res)
+		})
 		.catch(e => {
 			console.log(e);
 		});
@@ -122,7 +122,7 @@ const Dashboard = () => {
 								editing={editing}
 								setEditing={setEditing}
 								currentApp={currentApp}
-								updateApp={updateApps}
+								updateApplication={updateApplication}
 							/>
 						</Fragment>
 						) : (
@@ -134,7 +134,7 @@ const Dashboard = () => {
 				</div>
 				<div className="flex-large">
 					<h2>App list</h2>
-					<AppsTable apps={apps} editRow={editRow} deleteApp={deleteApps}/>
+					<AppsTable apps={apps} editRow={editRow} deleteApplication={deleteApplication}/>
 				</div>
 			</div>
 		</div>

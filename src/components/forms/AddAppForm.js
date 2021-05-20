@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AuthContext } from "../../App";
+import {createApp} from '../../services/AppsService'
 
 
 const AddAppForm = props => {
@@ -15,27 +16,18 @@ const AddAppForm = props => {
 		setApp({ ...app, [name]: value })
 	}
 
-	const token = "59ed93513ebf146e3016250012ee92b37e804b2a"
 
 	const saveApp = () => {
-		fetch("https://hiring-example-25770.botics.co/api/v1/apps/", {
-			method: "post",
-			headers: {
-				"Content-type": "application/json",
-				"Authorization": `Token ${token}`,
-			},
-			body: JSON.stringify(
-				{ name: app.name, description: app.description, type:app.type , framework:app.framework}
-			)
+		let data = { name: app.name, description: app.description, type:app.type , framework:app.framework}
+		createApp(data)
+		.then(res => {
+				console.log("Updated successfully", res)
 			})
-	    .then(response => {
-				console.log("the request within the app", response)
-
-      })
-      .catch(e => {
-        console.log(e);
-      });
+		.catch(e => {
+			console.log(e);
+		});
   };
+
 	const newApp = () => {
     setApp(initialFormState);
     setSubmitted(false);
