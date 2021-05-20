@@ -1,32 +1,27 @@
-import {apiGet} from './apiGateway.js';
+import {apiFetch, apiFetchWithBody, apiFetchLogin} from './apiGateway.js';
 
-export const getAllApps = () => {
+export const getAllApps = (key) => {
   const url = '/api/v1/apps/';
-  return apiGet(url, 'get');
+  return apiFetch(url, 'get', key);
 }
 
-export const getApp = id => {
+export const getApp = (id, key) => {
   const url = `/api/v1/apps/${id}/`;
-	return apiGet(url, 'get');
+	return apiFetch(url, 'get',key);
 };
 
-export const createApp = data => {
+export const createApp = (data, key) => {
   const url = "/api/v1/apps/";
-	return apiGet(url, 'post', data);
+	return apiFetchWithBody(url, 'post', data, key);
 };
 
-export const updateApp = (id, data) => {
+export const updateApp = (id, data, key) => {
   const url = `/api/v1/apps/${id}/`;
-	return apiGet(url, 'put', data);
+	return apiFetchWithBody(url, 'put', data, key);
 
 };
 
-export const deleteApp = (id, data) => {
+export const deleteApp = (id, data, key) => {
   const url = `/api/v1/apps/${id}/`;
-	return apiGet(url, 'delete', data);
+	return apiFetch(url, 'delete', key);
 };
-
-// export const patchApp = (id, data) => {
-//   const url = `/api/v1/apps/${id}/`;
-// 	return apiGet(url, 'patch', data);
-// };

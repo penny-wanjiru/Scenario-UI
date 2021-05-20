@@ -15,12 +15,12 @@ const Dashboard = () => {
 	const [ currentApp, setCurrentApp ] = useState(initialFormState)
 	const [ editing, setEditing ] = useState(false)
 
+	let key = state.token
+	console.log("Token in dashboard", key)
 
 	useEffect(() => {
-		getAllApps()
-    .then(data => {
-      setApps(data);
-    })
+		getAllApps(key)
+		.then(response => {console.log("why",response); setApps(response);})
  	}, [apps]);
 	//
 	// const retrieveApps = () => {
@@ -52,7 +52,7 @@ const Dashboard = () => {
 	}
 
 	const updateApplication = (id, app) => {
-		updateApp(id, app)
+		updateApp(id, app, key)
 		.then(res => {
 				console.log("Updated successfully", res)
 			})
@@ -62,10 +62,10 @@ const Dashboard = () => {
 	};
 
 	const deleteApplication = (id, app) => {
-		deleteApp(id, app)
+		deleteApp(id, app, key)
 		.then(res => {
 				console.log("Deleted successfully", res)
-		})
+			})
 		.catch(e => {
 			console.log(e);
 		});

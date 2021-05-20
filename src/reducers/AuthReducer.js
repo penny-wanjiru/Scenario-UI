@@ -14,6 +14,7 @@ export const reducer = (state, action) => {
         token: action.payload.token
       };
 		case "LOGIN":
+			localStorage.setItem('token', JSON.stringify(action.payload.token));
       return {
         ...state,
         isAuthenticated: true,
@@ -21,6 +22,7 @@ export const reducer = (state, action) => {
         token: action.payload.token
       };
     case "LOGOUT":
+
       return {
         ...state,
         isAuthenticated: false,
