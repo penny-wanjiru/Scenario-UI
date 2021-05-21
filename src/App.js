@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {ProtectedRoute} from './components/ProtectedRoute'
 import { Header } from './components/Header';
+import Plans from './pages/Plans';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Reset from './pages/PasswordReset';
@@ -57,6 +58,7 @@ const App = () => {
 				<Route exact path='/signup' component={Signup} />
 				<Route exact path='/reset' component={Reset} />
 				<Route exact path='/dashboard' component={Dashboard} />
+				<Route exact path='/plans' component={Plans} />
 			</Switch>
 		</AuthContext.Provider>
   );
