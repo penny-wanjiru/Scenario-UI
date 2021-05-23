@@ -29,7 +29,7 @@ const EditAppForm = props => {
       <label>Type</label>
       <input type="text" name="type" value={app.type} onChange={handleInputChange} />
 			<label>Description</label>
-      <input type="text" name="desription" value={app.description} onChange={handleInputChange} />
+      <input type="text" name="description" value={app.description} onChange={handleInputChange} />
       <label>Framework</label>
       <input type="text" name="framework" value={app.framework} onChange={handleInputChange} />
       <button>Update App</button>

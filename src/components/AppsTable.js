@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory, Redirect, Link} from 'react-router-dom';
 import Plans from '../pages/Plans'
 
 import {Table} from 'react-bootstrap';
@@ -21,13 +21,13 @@ const UpgradeButton = styled.button`
 const AppsTable = props => {
 	let history = useHistory();
 
-	const RenderPlans = () => {
-	  return  <Redirect  to="/signup" />
+	const handleUpgrade = (app_id, sub_id ) =>{
+		history.push({
+			pathname: '/plans',
+			state:{appId: app_id, subscriptionId:sub_id }
+		});
 	}
 
-	const location = {
-	  pathname: '/plans',
-	}
 
 	return(
 		<TableWrapper striped bordered hover >
@@ -37,37 +37,40 @@ const AppsTable = props => {
 	      <th>Description</th>
 	      <th>Type</th>
 				<th>Framework</th>
-				<th></th>
+				<th>Plan</th>
+				<th>Actions</th>
 	    </tr>
 	  </thead>
 	  <tbody>
 		{props.apps.length > 0 ? (
 	   props.apps.map(app => (
 	    <tr key={app.id}>
-				<td>{app.name}</td>
+				<td>
+  			<Link to='/subscriptions'>{app.name}</Link>
+				</td>
 				<td>{app.description}</td>
 				<td>{app.type}</td>
 				<td>{app.framework}</td>
+				<td>{app.subscription}</td>
 				<td>
-          <Button
+          <UpgradeButton
             onClick={() => {
               props.editRow(app)
             }}
             className="button muted-button"
           	>
             Edit
-          </Button>
-					<Button
+          </UpgradeButton>
+					<UpgradeButton
             onClick={() => props.deleteApplication(app.id)}
             className="button muted-button"
           >
             Delete
-          </Button>
+          </UpgradeButton>
 					<UpgradeButton
-						onClick={() => props.getPlans()}
-            className="button muted-button"
-          >
-            Upgrade Plan
+						onClick={() => handleUpgrade(app.id, app.subscription)}
+            className="button muted-button">
+            Upgrade
           </UpgradeButton>
         </td>
 	    </tr>

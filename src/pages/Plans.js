@@ -3,15 +3,14 @@ import {ListGroup, Table, Card, Container, Row, Col} from 'react-bootstrap';
 import styled from 'styled-components';
 import { AuthContext } from "../App";
 
-
-import {getPlans, createSubscriptions} from '../services/AppsService'
+import {createSubscription} from '../components/forms/AddAppForm'
+import {getSubscriptionPlans, getSubscription, createSubscriptions, updateSubscription} from '../services/AppsService'
 
 const Button = styled.button`
 	 margin-left: 82%;
 `
 const SelectButton = styled.button`
-	display: flex;
-	fle
+
 `
 const TableWrapper = styled(Table)`
 		margin-top: 8%;
@@ -24,74 +23,40 @@ export const CardsWrapper = styled.div`
 `;
 
 const Plans = (props) => {
-	// const { state } = React.useContext(AuthContext);
-	// let key = state.token
+	const { appId , subscriptionId } = props.location.state
+	const [subId, setSubId] = useState([]);
+	const [currentPlan, setCurrentPlan] = useState();
+	const [plans, setPlans] = useState([]);
+	const [planId, setPlanId] = useState();
 
-	// useEffect(() => {
-	// 	getPlans(key)
-	// 	.then(response => {console.log("why",response); setPlans(response);})
- 	// }, [plans]);
 
-	// const subscribe = (id, app, active) => {
-	// 	createSubscriptions(id, app, active, key)
-	// 	.then(res => {
-	// 			console.log("Deleted successfully", res)
-	// 	})
-	// 	.catch(e => {
-	// 		console.log(e);
-	// 	});
-	// };
+	const { state } = React.useContext(AuthContext);
+	let key = state.token
 
-	// return (
-	// 	<TableWrapper striped bordered hover >
-	//   <thead>
-	//     <tr>
-	//       <th>Name</th>
-	//       <th>Description</th>
-	//       <th>Price</th>
-	// 			<th></th>
-	//     </tr>
-	//   </thead>
-	//   <tbody>
-	// 	{props.plans.length > 0 ? (
-	//    props.plans.map(plan => (
-	// 	    <tr key={plan.id}>
-	// 				<td style={{color:"#5a05ff"}} >{plan.name}</td>
-	// 				<td>{plan.description}</td>
-	// 				<td>{plan.price}</td>
-	// 				<td>
-	// 					<Button
-	//
-	//             className="button muted-button"
-	//           >
-	//             Select
-	//           </Button>
-	//         </td>
-	// 	    </tr>
-	// 		))
-	// 		<Button
-	// 			onClick={() => props.setShowingPlans(false)}
-	// 			className="button muted-button"
-	// 		>
-	// 			Cancel
-	// 		</Button>
-	//      ) : (
-	//        <tr>
-	//          <td colSpan={3}>No plans</td>
-	//        </tr>
-	//      )}
-	//   </tbody>
-	// </TableWrapper>
-	// )
-	return(
+	useEffect(() => {
+		getSubscriptionPlans(key)
+		.then(response => {console.log("sub plans",response); setPlans(response);})
+ 	}, []);
+
+	useEffect(() => {
+		getSubscription(subscriptionId, key)
+		.then(response => {console.log("why",response); setCurrentPlan(response.plan)})
+	}, []);
+
+	const handleupdates = (planId, appId) => {
+		let data = {plan:planId, app: appId, active:true}
+		updateSubscription(subscriptionId, data, key)
+		.then(response => { console.log("update",response); setCurrentPlan(response.plan)})
+	}
+
+	return (
 		<Container>
 		<CardsWrapper>
-		  <Row xs={3} style={{marginLeft: "20px"}} >
-
+		  <Row xs={3}  >
 				{[
 					'Light',
 				].map((variant, idx) => (
-					props.plans.map(plan => (
+					plans.map(plan => (
 						<Col >
 							<Card
 								bg={variant.toLowerCase()}
@@ -100,37 +65,43 @@ const Plans = (props) => {
 								style={{ width: '12rem', height: '20rem' }}
 								className="mb-2"
 							>
-							<Card.Header>Header</Card.Header>
+							<Card.Header style={{color: "#5a05ff", fontWeight:600}}>Plan Number: {plan.id}</Card.Header>
+							<Card.Header style={{color: "#5a05ff", fontWeight:600}}>{plan.name}</Card.Header>
 							<Card.Body>
-								<Card.Title>{variant} {plan.name} </Card.Title>
-								<Card.Text>
-									Description :{plan.description}
+								<Card.Title></Card.Title>
+								<Card.Text style={{fontSize:"14px", fontStyle: "Italic" }}>
+									Description :<br/>
+									{plan.description}
+								</Card.Text>
+								<Card.Text style={{color: "green"}}>
 									Price: {plan.price}
 								</Card.Text>
 							</Card.Body>
 							<Card.Footer className="text-muted">
 								<SelectButton
 								className="button muted-button"
+								onClick={() => handleupdates(plan.id, appId)}
 								>
-								Select
+								Upgrade
 								</SelectButton>
 							</Card.Footer>
 							</Card>
 							</Col>
 					))
 				))}
-
 				</Row>
-
+				{currentPlan?
+					<div>You are currently subscribed to plan number: {currentPlan}</div>:
+					<div>You don't have a current subscription</div>
+				}
 				<Button
-					onClick={() => props.setShowingPlans(false)}
+
 					className="button muted-button"
 					>
 					Cancel
 				</Button>
 				</CardsWrapper>
 		</Container>
-
 	)
 }
 

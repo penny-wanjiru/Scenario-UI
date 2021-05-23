@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { AuthContext } from "../../App";
-import {createApp} from '../../services/AppsService'
+import {createApp, createSubscription} from '../../services/AppsService'
 
 
 const AddAppForm = props => {
 	const { state } = React.useContext(AuthContext);
+	let key = state.token
 	const initialFormState = { name:'Money', description:'Made', type: 'Mobile', framework:'Django'}
 	const [app, setApp] = useState(initialFormState);
 	const [submitted, setSubmitted] = useState(false);
@@ -16,12 +17,14 @@ const AddAppForm = props => {
 		setApp({ ...app, [name]: value })
 	}
 
-
 	const saveApp = () => {
 		let data = { name: app.name, description: app.description, type:app.type , framework:app.framework}
 		createApp(data)
 		.then(res => {
-				console.log("Updated successfully", res)
+				console.log("Added successfully", res)
+				let sub_data = {plan:1, app:res.id, active:true}
+				createSubscription(sub_data, key)
+				props.setAddedApp(res)
 			})
 		.catch(e => {
 			console.log(e);

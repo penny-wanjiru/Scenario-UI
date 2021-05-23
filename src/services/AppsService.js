@@ -11,7 +11,7 @@ export const getApp = (id, key) => {
 };
 
 export const createApp = (data, key) => {
-  const url = "/api/v1/apps/";
+  const url = '/api/v1/apps/';
 	return apiFetchWithBody(url, 'post', data, key);
 };
 
@@ -25,32 +25,32 @@ export const deleteApp = (id, data, key) => {
 	return apiFetch(url, 'delete', key);
 };
 
-export const getPlans = (id, data, key) => {
-  const url = "/api​/v1​/plans​/";
+export const getSubscriptionPlans = (key) => {
+  const url = '/api/v1/plans/';
 	return apiFetch(url, 'get', key);
 };
 
-export const getPlan = (id, data, key) => {
+export const getPlan = (id, key) => {
   const url = `/api​/v1​/plans​/${id}/`;
 	return apiFetch(url, 'get', key);
 };
 
-export const getSubscriptions = (id, data, key) => {
-  const url = "/api/v1/subscriptions/";
+export const getSubscriptions = (id, key) => {
+  const url = '/api/v1/subscriptions/';
 	return apiFetch(url, 'get', key);
 };
 
-export const createSubscriptions = (id, data, key) => {
-  const url = "/api/v1/subscriptions/";
-	return apiFetch(url, 'post', key);
+export const createSubscription = (data, key) => {
+  const url = 'api/v1/subscriptions/';
+	return apiFetchWithBody(url, 'post', key);
 };
 
-export const getSubscription = (id, data, key) => {
+export const getSubscription = (id, key) => {
   const url = `/api/v1/subscriptions/${id}/`;
 	return apiFetch(url, 'get', key);
 };
 
-export const editSubscription = (id, data, key) => {
+export const updateSubscription = (id, data, key) => {
   const url = `/api/v1/subscriptions/${id}/`;
-	return apiFetch(url, 'put', key);
+	return apiFetchWithBody(url, 'put', data, key);
 };

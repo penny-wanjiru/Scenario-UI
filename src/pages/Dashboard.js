@@ -13,7 +13,8 @@ const Dashboard = () => {
 
 	// Setting state
 	const [apps, setApps] = useState([]);
-	const [plans, setPlans] = useState([1, 2,3]);
+	const [addedApp, setAddedApp] = useState([]);
+
 	const [ currentApp, setCurrentApp ] = useState(initialFormState)
 	const [ showPlans, setShowingPlans ] = useState(false)
 	const [ editing, setEditing ] = useState(false)
@@ -23,29 +24,14 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		getAllApps(key)
-		.then(response => {console.log("why",response); setApps(response);})
- 	}, [apps]);
+		.then(response => {console.log("app res",response); setApps(response)})
+ 	}, [addedApp]);
 
-	useEffect(() => {
-		getPlans(key)
-		.then(response => {console.log("why",response); setPlans(response);})
- 	}, [plans]);
 
 	const editRow = app => {
 		setEditing(true)
 		setCurrentApp({ id: app.id, name: app.name, description: app.description, type: app.type, framework:app.framework})
 	}
-
-	const getSubscriptionPlans = () => {
-		setShowingPlans(true)
-		// getPlans(key)
-		// .then(res => {
-		// 		console.log("showed successfully", res)
-		// 	})
-		// .catch(e => {
-		// 	console.log(e);
-		// });
-	};
 
 	const updateApplication = (id, app) => {
 		updateApp(id, app, key)
@@ -84,19 +70,15 @@ const Dashboard = () => {
 						) : (
 						<Fragment>
 							<h2>Add App</h2>
-							<AddAppForm/>
+							<AddAppForm
+								setAddedApp={setAddedApp}
+							/>
 						</Fragment>
 					)}
 				</div>
 				<div className="flex-large">
 					<h2>App list</h2>
-						<AppsTable apps={apps} editRow={editRow} deleteApplication={deleteApplication} getPlans={getSubscriptionPlans} />
-						{showPlans?<Plans
-							plans={plans}
-							showPlans={showPlans}
-							setShowingPlans={setShowingPlans}
-						/>:
-						null}
+						<AppsTable apps={apps} editRow={editRow} deleteApplication={deleteApplication}/>
 				</div>
 			</div>
 		</div>
