@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
+import {Input, SubmitButton} from "../../styles/forms";
 
 const EditAppForm = props => {
   const [ app, setApp ] = useState(props.currentApp)
@@ -32,8 +33,8 @@ const EditAppForm = props => {
       <input type="text" name="description" value={app.description} onChange={handleInputChange} />
       <label>Framework</label>
       <input type="text" name="framework" value={app.framework} onChange={handleInputChange} />
-      <button>Update App</button>
-      <button onClick={() => props.setEditing(false)} className="button muted-button">
+      <SubmitButton>Update App</SubmitButton>
+      <button style={{float:"right", marginTop: "1rem"}} onClick={() => props.setEditing(false)} className="button muted-button">
         Cancel
       </button>
     </form>

@@ -11,11 +11,13 @@ const TableWrapper = styled(Table)`
 `;
 const Button = styled.button`
 		margin-left: 2%;
+		height:10px;
 `;
 const UpgradeButton = styled.button`
 		margin-left: 2%;
 		margin-top: 4%;
-		width: 65%;
+		width:55%;
+		padding: 0.35rem 0.15rem;
 `;
 
 const AppsTable = props => {
@@ -24,10 +26,9 @@ const AppsTable = props => {
 	const handleUpgrade = (app_id, sub_id ) =>{
 		history.push({
 			pathname: '/plans',
-			state:{appId: app_id, subscriptionId:sub_id }
+			state: { appId: app_id, subscriptionId:sub_id }
 		});
 	}
-
 
 	return(
 		<TableWrapper striped bordered hover >
@@ -37,7 +38,7 @@ const AppsTable = props => {
 	      <th>Description</th>
 	      <th>Type</th>
 				<th>Framework</th>
-				<th>Plan</th>
+				<th>Subs</th>
 				<th>Actions</th>
 	    </tr>
 	  </thead>
@@ -62,12 +63,14 @@ const AppsTable = props => {
 					<UpgradeButton
             onClick={() => props.deleteApplication(app.id)}
             className="button muted-button"
+						style={{color:"red"}}
           >
             Delete
           </UpgradeButton>
 					<UpgradeButton
 						onClick={() => handleUpgrade(app.id, app.subscription)}
-            className="button muted-button">
+            className="button muted-button"
+						style={{color:"blue"}}>
             Upgrade
           </UpgradeButton>
         </td>

@@ -7,7 +7,7 @@ import {ValidationSchema} from '../schema/validation'
 import { AuthContext } from "../App";
 
 
-import { Wrapper, FormCard, Message, Heading , Group, SubmitButton, Paragraph} from "../styles/forms";
+import { Wrapper, FormCard, Message, Heading , Group, LoginButton, Paragraph} from "../styles/forms";
 
 
 const Login = () => {
@@ -84,9 +84,9 @@ const Login = () => {
 							{serverErrors.errorMessage}
 						</span>
         	)}
-					<SubmitButton variant="primary" type="submit">
+					<LoginButton variant="primary" type="submit">
 						{isSubmitting ? "Signing in..." : "Login"}
-					</SubmitButton>
+					</LoginButton>
 					<Paragraph>
 						Not registered? <a href="/signup"> Signup </a>
 					</Paragraph>

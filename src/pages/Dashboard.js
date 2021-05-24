@@ -6,7 +6,6 @@ import Plans from '../pages/Plans'
 import { AuthContext } from "../App";
 import {getAllApps, updateApp, deleteApp, getPlans} from '../services/AppsService'
 
-
 const Dashboard = () => {
 	const { state } = React.useContext(AuthContext);
 	const initialFormState = { id: null, name: '', description: '', type:'', framework:''}
@@ -61,7 +60,7 @@ const Dashboard = () => {
   };
 
 	return (
-		<div className="container">
+		<div className="container" style={{marginTop: "5%"}}>
 			<div className="flex-row">
 				<div className="flex-large">
 					{editing ? (

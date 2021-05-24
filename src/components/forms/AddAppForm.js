@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { AuthContext } from "../../App";
 import {createApp, createSubscription} from '../../services/AppsService'
 
+import {Input, SubmitButton} from "../../styles/forms";
+
 
 const AddAppForm = props => {
 	const { state } = React.useContext(AuthContext)
@@ -39,7 +41,7 @@ const AddAppForm = props => {
 				<div>
 					<div className="form-group">
 						<label htmlFor="name">Name</label>
-						<input
+						<Input
 							type="text"
 							className="form-control"
 							id="name"
@@ -65,7 +67,7 @@ const AddAppForm = props => {
 					</div>
 					<div className="form-group">
 						<label htmlFor="description">Description</label>
-						<input
+						<Input
 							type="text"
 							className="form-control"
 							id="description"
@@ -75,9 +77,9 @@ const AddAppForm = props => {
 							name="description"
 						/>
 					</div>
-					<button onClick={saveApp} className="btn btn-success">
+					<SubmitButton onClick={saveApp}>
 						Submit
-					</button>
+					</SubmitButton>
 				</div>
 		</div>
 	)

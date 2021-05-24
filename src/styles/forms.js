@@ -34,7 +34,7 @@ export const Group = styled(Form.Group)`
 `
 
 export const SubmitButton = styled(Button)`
-	width: 100%;
+	width:30%;
 	padding: 11px 13px;
 	border: none;
 	border-radius: 30px;
@@ -45,6 +45,17 @@ export const SubmitButton = styled(Button)`
   }
 `;
 
+export const LoginButton = styled(Button)`
+	width:100%;
+	padding: 11px 13px;
+	border: none;
+	border-radius: 30px;
+	margin-top: 1rem;
+	background: #5a05ff;
+	&:hover {
+    border-color: #727cf5;
+  }
+`;
 export const Paragraph = styled.p`
 	display: flex;
 	justify-content: center;
@@ -54,3 +65,7 @@ export const Paragraph = styled.p`
 		padding: 20px;
 	}
 `;
+
+export const Input = styled.input`
+	height: 52px;
+`

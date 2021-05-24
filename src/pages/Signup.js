@@ -5,7 +5,7 @@ import { Formik, Field } from "formik";
 import {ValidationSchema} from '../schema/validation'
 import { AuthContext } from "../App";
 
-import { Wrapper, FormCard, Message, Heading , Group, SubmitButton, Paragraph} from "../styles/forms";
+import { Wrapper, FormCard, Message, Heading , Group, LoginButton, Paragraph} from "../styles/forms";
 
 const Signup = () => {
 	const history = useHistory();
@@ -79,9 +79,9 @@ const Signup = () => {
 									{serverErrors.errorMessage}
 								</span>
 		        	)}
-							<SubmitButton variant="primary" type="submit">
+							<LoginButton variant="primary" type="submit">
 								{isSubmitting ? "Signing up..." : "SignUp"}
-							</SubmitButton>
+							</LoginButton>
 							<Paragraph>
 								Already registered <a href="/"> sign in? </a>
 							</Paragraph>

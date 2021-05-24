@@ -16,12 +16,6 @@ const TableWrapper = styled(Table)`
 		margin-top: 8%;
 `;
 
-export const CardsWrapper = styled.div`
-	border: 1px solid #cccccc;
-	border-radius: 5px;
-	padding: 30px 0px 30px 0px;
-`;
-
 const Plans = (props) => {
 	const { appId , subscriptionId } = props.location.state
 	const [subId, setSubId] = useState([]);
@@ -51,7 +45,6 @@ const Plans = (props) => {
 
 	return (
 		<Container>
-		<CardsWrapper>
 		  <Row xs={3}  >
 				{[
 					'Light',
@@ -62,7 +55,7 @@ const Plans = (props) => {
 								bg={variant.toLowerCase()}
 								key={idx}
 								text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
-								style={{ width: '12rem', height: '20rem' }}
+								style={{ width: '20rem', height: '20rem' }}
 								className="mb-2"
 							>
 							<Card.Header style={{color: "#5a05ff", fontWeight:600}}>Plan Number: {plan.id}</Card.Header>
@@ -95,12 +88,10 @@ const Plans = (props) => {
 					<div>You don't have a current subscription</div>
 				}
 				<Button
-
 					className="button muted-button"
 					>
 					Cancel
 				</Button>
-				</CardsWrapper>
 		</Container>
 	)
 }
