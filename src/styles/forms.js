@@ -12,16 +12,8 @@ export const Wrapper = styled.div`
 	border: 1px solid #cccccc;
 `;
 
-// export const FormWrapper = styled(Form)`
-// 	margin: 0 auto;
-// 	width: 100%;
-//   max-width: 414px;
-// 	position: relative;
-//
-// `;
-
 export const FormCard = styled(Form)`
-	width:22%;
+	width:30%;
 	border: 1px solid #cccccc;
 	border-radius: 5px;
 	padding: 40px;

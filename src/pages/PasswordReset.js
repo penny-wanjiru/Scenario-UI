@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Form} from 'react-bootstrap';
 
 import { Formik } from "formik";
@@ -8,40 +8,62 @@ import { Wrapper, Message, Heading , FormCard, Group, SubmitButton, Paragraph} f
 
 
 const ValidationSchema = Yup.object().shape({
-  password: Yup.string().required("*Password is required"),
-  changepassword: Yup.string().when("password", {
-    is: val => (val && val.length > 0 ? true : false),
-    then: Yup.string().oneOf(
-      [Yup.ref("password")],
-      "*Both password need to be the same"
-    )
-  })
-});
+	email: Yup.string()
+	.email("*Must be a valid email address")
+	.required("*Email is required")
+})
 
 const Reset = () => {
+	const [message, setMessage] = useState([]);
+	const [serverErrors, setServerErrors] = useState( {errorStatus:null, errorMessage: null});
+
   return (
 		<Wrapper>
     <Formik
       initialValues={{
-        password: "",
-        changepassword: ""
+        email: ""
       }}
       validationSchema={ValidationSchema}
-      onSubmit={(values) => {console.log("faf",values)}}
+			onSubmit={(values, {setSubmitting, setErrors, resetForm}) => {
+				fetch("https://hiring-example-25770.botics.co/rest-auth/password/reset/", {
+					method: "post",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({email: values.email})
+					})
+					.then(res => {
+						if (res.ok) {
+							console.log("getting pass reset", res)
+							return res.json();
+						}
+						throw res;
+					})
+					.then(resJson => {
+						setMessage(resJson)
+						console.log("True response", resJson)
+					})
+					.catch(error => {
+						setServerErrors({
+							errorStatus: error.status || error.statusText,
+							errorMessage: "Validation Error: Enter correct details"
+						});
+					});
+			}}
     >
 			{( {values, errors, handleChange, handleBlur, handleSubmit, isSubmitting, isValid}) => (
 				<FormCard onSubmit={handleSubmit}>
 					<Heading>Reset password</Heading>
-					<Group controlId="formBasicPassword">
-						<Form.Label>Current Password</Form.Label>
-						<Form.Control type="password" placeholder="Password" name="password" onBlur={handleBlur} value={values.password} onChange={handleChange}/>
+					<Group controlId="formBasicEmail">
+						<Form.Label>Email address</Form.Label>
+						<Form.Control type="email" placeholder="Enter email" name="email" value={values.email} onChange={handleChange}/>
+						<span className="error" style={{ color: "red" }}>
+							{errors.email}
+						</span>
 					</Group>
-					<Message name="bodyType" component="div" />
-					<Group controlId="formBasicPassword">
-						<Form.Label>Password</Form.Label>
-						<Form.Control type="password" placeholder="ChangePassword" name="changepassword" onBlur={handleBlur} value={values.changepassword} onChange={handleChange}/>
-					</Group>
-					<Message name="bodyType" component="div" />
+					<span className="error" style={{ color: "blue" }}>
+						{message.detail}
+					</span>
 					<SubmitButton variant="primary" type="submit">
 						Reset
 					</SubmitButton>

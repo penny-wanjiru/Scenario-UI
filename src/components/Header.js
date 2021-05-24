@@ -44,7 +44,7 @@ export const Header = () => {
 		<div>
 			{state.isAuthenticated?(
 				<Navbar style={{background:"#1e0a45"}}>
-					<Navbar.Brand  href="#home" style={{color:"#ffffff", marginLeft:"2%"}} >Crowdbotics-Mini</Navbar.Brand>
+					<Navbar.Brand  href="/" style={{color:"#ffffff", marginLeft:"2%"}} >Crowdbotics-Mini</Navbar.Brand>
 					<Navbar.Toggle />
 					<Navbar.Collapse className="justify-content-end">
 						<Navbar.Text style={{paddingRight:"80px"}}>
@@ -54,7 +54,7 @@ export const Header = () => {
 				</Navbar>
 		):(
 			<Navbar style={{background:"#1e0a45"}}>
-				<Navbar.Brand  href="#home" style={{color:"#ffffff", marginLeft:"2%"}} >Crowdbotics-Mini</Navbar.Brand>
+				<Navbar.Brand  href="/" style={{color:"#ffffff", marginLeft:"2%"}} >Crowdbotics-Mini</Navbar.Brand>
 			</Navbar>
 		)}
 	</div>
