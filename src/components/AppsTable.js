@@ -45,9 +45,7 @@ const AppsTable = props => {
 		{props.apps.length > 0 ? (
 	   props.apps.map(app => (
 	    <tr key={app.id}>
-				<td>
-  			<Link to='/subscriptions'>{app.name}</Link>
-				</td>
+				<td>{app.name}</td>
 				<td>{app.description}</td>
 				<td>{app.type}</td>
 				<td>{app.framework}</td>

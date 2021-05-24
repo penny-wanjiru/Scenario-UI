@@ -4,12 +4,12 @@ import {createApp, createSubscription} from '../../services/AppsService'
 
 
 const AddAppForm = props => {
-	const { state } = React.useContext(AuthContext);
-	let key = state.token
-	const initialFormState = { name:'Money', description:'Made', type: 'Mobile', framework:'Django'}
+	const { state } = React.useContext(AuthContext)
+	const initialFormState = { name:'Example Name', description:'Example desc', type: 'Mobile', framework:'Django'}
 	const [app, setApp] = useState(initialFormState);
-	const [submitted, setSubmitted] = useState(false);
+	const [submitted, setSubmitted] = useState(false)
 
+	const key = state.token
 
 	const handleInputChange = event => {
 		const { name, value } = event.target
@@ -21,31 +21,21 @@ const AddAppForm = props => {
 		let data = { name: app.name, description: app.description, type:app.type , framework:app.framework}
 		createApp(data)
 		.then(res => {
-				console.log("Added successfully", res)
 				let sub_data = {plan:1, app:res.id, active:true}
 				createSubscription(sub_data, key)
 				props.setAddedApp(res)
+				setSubmitted(true);
 			})
 		.catch(e => {
-			console.log(e);
+			props.setServerErrors({
+				errorStatus: e.status,
+				errorMessage:`An Error has occured: ${e.statusText}`
+			});
 		});
-  };
-
-	const newApp = () => {
-    setApp(initialFormState);
-    setSubmitted(false);
   };
 
 	return (
 		<div className="submit-form">
-			{submitted ? (
-				<div>
-					<h4>You submitted successfully!</h4>
-					<button className="btn btn-success" onClick={newApp}>
-						Add
-					</button>
-				</div>
-			) : (
 				<div>
 					<div className="form-group">
 						<label htmlFor="name">Name</label>
@@ -60,16 +50,18 @@ const AddAppForm = props => {
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="name">Type</label>
-						<input
-							type="text"
-							className="form-control"
-							id="type"
-							required
-							value={app.type}
-							onChange={handleInputChange}
-							name="type"
-						/>
+						<label htmlFor="type">Type</label>
+						<select id="type" name="type"onChange={handleInputChange} required>
+							<option value="Web">Web</option>
+							<option value="Mobile">Mobile</option>
+						</select>
+					</div>
+					<div className="form-group">
+						<label htmlFor="framework">Framework</label>
+						<select id="framework" name="framework"onChange={handleInputChange} required>
+							<option value="Django">Django</option>
+							<option value="React Native">React Native</option>
+						</select>
 					</div>
 					<div className="form-group">
 						<label htmlFor="description">Description</label>
@@ -87,7 +79,6 @@ const AddAppForm = props => {
 						Submit
 					</button>
 				</div>
-			)}
 		</div>
 	)
 }

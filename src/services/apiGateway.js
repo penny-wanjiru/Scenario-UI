@@ -14,7 +14,7 @@ export const apiFetchWithBody = (url, method, data, key) => {
 		})
     .then(response => {
       if (!response.ok) {
-        console.log("Network failure")
+				throw response;
       }
       return response;
     })
@@ -27,16 +27,14 @@ export const apiFetch = (url, method, key) => {
 		"Content-type": "application/json",
 		"Authorization": `Token ${token}`,
 	}
-
   return fetch(API_ROOT + url, {
 			method: method,
 			headers: headers,
 		})
     .then(response => {
       if (!response.ok) {
-        console.log("Network failure")
+				throw response;
       }
-			console.log("getting here", response)
       return response;
     })
     .then(data => data.json())

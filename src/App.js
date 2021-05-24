@@ -11,6 +11,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Reset from './pages/PasswordReset';
 import Dashboard from './pages/Dashboard';
+import FourOhFour from './pages/404';
 
 export const AuthContext = React.createContext();
 
@@ -50,6 +51,8 @@ const reducer = (state, action) => {
 
 const App = () => {
 	const [state, dispatch] = React.useReducer(reducer, initialState);
+	const Page404 = () => <h1>Four:oh:four</h1>
+
   return (
 		<AuthContext.Provider value={{state, dispatch}}>
 			{console.log("This is the user in app", state.token)}
@@ -58,9 +61,9 @@ const App = () => {
 				<Route exact path='/' component={Login} />
 				<Route exact path='/signup' component={Signup} />
 				<Route exact path='/reset' component={Reset} />
-				<Route exact path='/dashboard' component={Dashboard} />
-				<Route exact path='/subscriptions' component={Subscription} />
-				<Route exact path='/plans' component={Plans} />
+				<ProtectedRoute exact path='/dashboard' component={Dashboard} />
+				<ProtectedRoute exact path='/plans' component={Plans} />
+				<Route component={FourOhFour} />
 			</Switch>
 		</AuthContext.Provider>
   );

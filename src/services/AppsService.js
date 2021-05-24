@@ -20,7 +20,7 @@ export const updateApp = (id, data, key) => {
 	return apiFetchWithBody(url, 'put', data, key);
 };
 
-export const deleteApp = (id, data, key) => {
+export const deleteApp = (id, key) => {
   const url = `/api/v1/apps/${id}/`;
 	return apiFetch(url, 'delete', key);
 };
@@ -42,7 +42,7 @@ export const getSubscriptions = (id, key) => {
 
 export const createSubscription = (data, key) => {
   const url = 'api/v1/subscriptions/';
-	return apiFetchWithBody(url, 'post', key);
+	return apiFetchWithBody(url, 'post', data, key);
 };
 
 export const getSubscription = (id, key) => {
