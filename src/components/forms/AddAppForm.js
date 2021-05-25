@@ -25,7 +25,6 @@ const AddAppForm = props => {
 		.then(res => {
 			let sub_data = {plan:1, app:res.id, active:true}
 			const subs = createSubscription(sub_data, key)
-			props.setAddedApp(res)
 			setSubmitted(true);
 		})
 		.catch(e => {

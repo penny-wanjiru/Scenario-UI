@@ -5,12 +5,12 @@ import {Input, SubmitButton} from "../../styles/Forms";
 const EditAppForm = props => {
   const [ app, setApp ] = useState(props.currentApp)
 
-  useEffect(
-    () => {
-      setApp(props.currentApp)
-    },
-    [ props ]
-  )
+  // useEffect(
+  //   () => {
+  //     setApp(props.currentApp)
+  //   },
+  //   [ props ]
+  // )
 
   const handleInputChange = event => {
     const { name, value } = event.target
@@ -27,10 +27,20 @@ const EditAppForm = props => {
 	    >
       <label>Name</label>
       <input type="text" name="name" value={app.name} onChange={handleInputChange} />
-      <label>Type</label>
-      <input type="text" name="type" value={app.type} onChange={handleInputChange} />
-			<label>Framework</label>
-			<input type="text" name="framework" value={app.framework} onChange={handleInputChange} />
+			<div className="form-group">
+				<label htmlFor="type">Type</label>
+				<select id="type" name="type"onChange={handleInputChange} required>
+					<option value="Web">Web</option>
+					<option value="Mobile">Mobile</option>
+				</select>
+			</div>
+			<div className="form-group">
+				<label htmlFor="framework">Framework</label>
+				<select id="framework" name="framework" onChange={handleInputChange} required>
+					<option value="Django">Django</option>
+					<option value="React Native">React Native</option>
+				</select>
+			</div>
 			<label>Description</label>
       <input type="text" name="description" value={app.description} onChange={handleInputChange} />
       <button style={{marginTop: "1rem"}}>Update App</button>
