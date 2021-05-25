@@ -1,9 +1,9 @@
 import React from 'react'
 import { useHistory, Redirect, Link} from 'react-router-dom';
+
 import Plans from '../pages/Plans'
 
 import {Table} from 'react-bootstrap';
-
 import styled from 'styled-components';
 
 const TableWrapper = styled(Table)`

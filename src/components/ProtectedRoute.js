@@ -7,8 +7,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
   return (
     <Route {...rest} render={
       props => {
-			let token = localStorage.getItem('token')
-			if (token){
+			if (state.isAuthenticated){
 				 return <Component {...rest} {...props} />
 			}
 			else {

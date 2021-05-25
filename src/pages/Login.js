@@ -7,7 +7,7 @@ import {ValidationSchema} from '../schema/Validation'
 import { AuthContext } from "../App";
 
 
-import { Wrapper, FormCard, Message, Heading , Group, LoginButton, Paragraph} from "../styles/forms";
+import { Wrapper, FormCard, Message, Heading , Group, LoginButton, Paragraph} from "../styles/Forms";
 
 
 const Login = () => {
@@ -36,13 +36,11 @@ const Login = () => {
 				})
 					.then(res => {
 						if (res.ok) {
-							console.log("getting user", res)
 							return res.json();
 						}
 						throw res;
 					})
 					.then(resJson => {
-						console.log("True response", resJson)
 						setSubmitting(false)
 						dispatch({
 							type: "LOGIN",
@@ -63,7 +61,6 @@ const Login = () => {
 			>
 		 	{( {values, errors, handleChange, handleBlur, handleSubmit, isSubmitting, isValid}) => (
 				<FormCard onSubmit={handleSubmit}>
-				{console.log("The errors", errors)}
 					<Heading>Login</Heading>
 					<Group controlId="formBasicEmail">
 						<Form.Label>Email address</Form.Label>

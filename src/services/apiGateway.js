@@ -1,7 +1,6 @@
 const API_ROOT = 'https://hiring-example-25770.botics.co';
 
 export const apiFetchWithBody = (url, method, data, key) => {
-	const token = "f1091415f89f55cddde3ab1f42d54b720e303042"
 	const headers = {
 		"Content-type": "application/json",
 		"Authorization": `Token ${key}`,
@@ -22,7 +21,6 @@ export const apiFetchWithBody = (url, method, data, key) => {
 };
 
 export const apiFetch = (url, method, key) => {
-	const token = "f1091415f89f55cddde3ab1f42d54b720e303042"
 	const headers = {
 		"Content-type": "application/json",
 		"Authorization": `Token ${key}`,

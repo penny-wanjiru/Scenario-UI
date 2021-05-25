@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+
 import { AuthContext } from "../../App";
 import {createApp, createSubscription} from '../../services/AppsService'
 
-import {Input, SubmitButton} from "../../styles/forms";
+import {Input, SubmitButton} from "../../styles/Forms";
 
 
 const AddAppForm = props => {
@@ -21,13 +22,13 @@ const AddAppForm = props => {
 
 	const saveApp = () => {
 		let data = { name: app.name, description: app.description, type:app.type , framework:app.framework}
-		createApp(data)
+		createApp(data, key)
 		.then(res => {
-				let sub_data = {plan:1, app:res.id, active:true}
-				createSubscription(sub_data, key)
-				props.setAddedApp(res)
-				setSubmitted(true);
-			})
+			let sub_data = {plan:1, app:res.id, active:true}
+			const subs = createSubscription(sub_data, key)
+			props.setAddedApp(res)
+			setSubmitted(true);
+		})
 		.catch(e => {
 			props.setServerErrors({
 				errorStatus: e.status,
@@ -60,7 +61,7 @@ const AddAppForm = props => {
 					</div>
 					<div className="form-group">
 						<label htmlFor="framework">Framework</label>
-						<select id="framework" name="framework"onChange={handleInputChange} required>
+						<select id="framework" name="framework" onChange={handleInputChange} required>
 							<option value="Django">Django</option>
 							<option value="React Native">React Native</option>
 						</select>

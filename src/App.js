@@ -50,12 +50,10 @@ export const reducer = (state, action) => {
 
 const App = () => {
 	const [state, dispatch] = React.useReducer(reducer, initialState);
-
 	const Page404 = () => <h1>Four:oh:four</h1>
 
   return (
 		<AuthContext.Provider value={{state, dispatch}}>
-			{console.log("This is the user in app", state.token)}
 			<Header/>
 			<Switch>
 				<Route exact path='/' component={Login} />

@@ -4,7 +4,7 @@ import {Form} from 'react-bootstrap';
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-import { Wrapper, Message, Heading , FormCard, Group, SubmitButton, Paragraph} from "../styles/forms";
+import { Wrapper, Message, Heading , FormCard, Group, SubmitButton, Paragraph} from "../styles/Forms";
 
 
 const ValidationSchema = Yup.object().shape({
@@ -34,14 +34,12 @@ const Reset = () => {
 					})
 					.then(res => {
 						if (res.ok) {
-							console.log("getting pass reset", res)
 							return res.json();
 						}
 						throw res;
 					})
 					.then(resJson => {
 						setMessage(resJson)
-						console.log("True response", resJson)
 					})
 					.catch(error => {
 						setServerErrors({

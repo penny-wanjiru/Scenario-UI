@@ -1,4 +1,5 @@
 import React , { useState, useEffect, Fragment } from 'react'
+import { useHistory} from "react-router-dom";
 import {ListGroup, Table, Card, Container, Row, Col} from 'react-bootstrap';
 import styled from 'styled-components';
 import { AuthContext } from "../App";
@@ -17,7 +18,8 @@ const TableWrapper = styled(Table)`
 `;
 
 const Plans = (props) => {
-	const { appId , subscriptionId } = props.location.state
+	const history = useHistory();
+	const { appId , subscriptionId } = props.location.state;
 	const [subId, setSubId] = useState([]);
 	const [currentPlan, setCurrentPlan] = useState();
 	const [plans, setPlans] = useState([]);
@@ -29,23 +31,29 @@ const Plans = (props) => {
 
 	useEffect(() => {
 		getSubscriptionPlans(key)
-		.then(response => {console.log("sub plans",response); setPlans(response);})
+		.then(response => { setPlans(response);})
  	}, []);
 
 	useEffect(() => {
 		getSubscription(subscriptionId, key)
-		.then(response => {console.log("why",response); setCurrentPlan(response.plan)})
+		.then(response => {setCurrentPlan(response.plan)})
 	}, []);
 
 	const handleupdates = (planId, appId) => {
 		let data = {plan:planId, app: appId, active:true}
 		updateSubscription(subscriptionId, data, key)
-		.then(response => { console.log("update",response); setCurrentPlan(response.plan)})
+		.then(response => {setCurrentPlan(response.plan)})
+	}
+
+	const handleRedirect = ( ) =>{
+		history.push({
+			pathname: '/',
+		});
 	}
 
 	return (
 		<Container>
-		  <Row xs={3}  >
+		  <Row xs={3} style={{width:"90%", marginLeft:"6%", marginTop:"10%"}} >
 				{[
 					'Light',
 				].map((variant, idx) => (
@@ -84,12 +92,12 @@ const Plans = (props) => {
 				))}
 				</Row>
 				{currentPlan?
-					<div>You are currently subscribed to plan number: {currentPlan}</div>:
-					<div>You don't have a current subscription</div>
+					<div style={{paddingTop:"5%", marginLeft:"6%",fontWeight:500}}>You are currently subscribed to plan number: {currentPlan}</div>:
+					<div style={{paddingTop:"5%", marginLeft:"6%", fontWeight:500}}>You don't have a current subscription</div>
 				}
 				<Button
 					className="button muted-button"
-					>
+					onClick={handleRedirect}>
 					Cancel
 				</Button>
 		</Container>

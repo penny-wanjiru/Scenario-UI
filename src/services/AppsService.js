@@ -41,7 +41,7 @@ export const getSubscriptions = (id, key) => {
 };
 
 export const createSubscription = (data, key) => {
-  const url = 'api/v1/subscriptions/';
+  const url = '/api/v1/subscriptions/';
 	return apiFetchWithBody(url, 'post', data, key);
 };
 

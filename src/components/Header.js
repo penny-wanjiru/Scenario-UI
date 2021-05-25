@@ -1,16 +1,17 @@
-import React, { useState } from "react"
-import { useEffect } from "react"
-import styled from "styled-components"
+import React, { useState , useEffect} from "react"
 import { Link , useHistory} from "react-router-dom";
-import {Navbar, Nav} from 'react-bootstrap';
+
 import { AuthContext } from "../App";
+
+import styled from "styled-components"
+import {Navbar, Nav} from 'react-bootstrap';
+
 
 
 export const Header = () => {
 	const history = useHistory();
 	const { state, dispatch } = React.useContext(AuthContext);
 
-	console.log("this is the state", state)
 
 	const logout = () => {
 		fetch("https://hiring-example-25770.botics.co/rest-auth/logout/", {
@@ -21,7 +22,6 @@ export const Header = () => {
 		})
 		.then(res => {
 			if (res.ok) {
-				console.log("getting user", res)
 				return res.json();
 			}
 			throw res;

@@ -1,10 +1,12 @@
 import React, { useState, useEffect, Fragment } from 'react'
+
+import { AuthContext } from "../App";
+import {getAllApps, updateApp, deleteApp, getPlans} from '../services/AppsService'
+
 import AddAppForm from '../components/forms/AddAppForm'
 import EditAppForm from '../components/forms/EditAppForm'
 import AppsTable from '../components/AppsTable'
 import Plans from '../pages/Plans'
-import { AuthContext } from "../App";
-import {getAllApps, updateApp, deleteApp, getPlans} from '../services/AppsService'
 
 const Dashboard = () => {
 	const { state } = React.useContext(AuthContext);
@@ -23,7 +25,7 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		getAllApps(key)
-		.then(response => {console.log("app res",response); setApps(response)})
+		.then(response => {setApps(response)})
  	}, [addedApp]);
 
 	const editRow = app => {
@@ -34,7 +36,6 @@ const Dashboard = () => {
 	const updateApplication = (id, app) => {
 		updateApp(id, app, key)
 		.then(res => {
-				console.log("Updated successfully", res)
 				setAddedApp(app)
 			})
 		.catch(e => {
@@ -46,10 +47,9 @@ const Dashboard = () => {
 	};
 
 	const deleteApplication = (id, app) => {
-		deleteApp(id, app, key)
+		deleteApp(id, key)
 		.then(res => {
-				console.log("Deleted successfully", res)
-				setAddedApp(app)
+			setAddedApp("state")
 		})
 		.catch(e => {
 			setServerErrors({

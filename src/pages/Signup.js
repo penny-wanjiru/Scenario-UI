@@ -1,11 +1,12 @@
 import React from "react";
 import { Link, useHistory} from "react-router-dom";
 import {Form, Button} from 'react-bootstrap';
+
 import { Formik, Field } from "formik";
 import {ValidationSchema} from '../schema/Validation'
 import { AuthContext } from "../App";
 
-import { Wrapper, FormCard, Message, Heading , Group, LoginButton, Paragraph} from "../styles/forms";
+import { Wrapper, FormCard, Message, Heading , Group, LoginButton, Paragraph} from "../styles/Forms";
 
 const Signup = () => {
 	const history = useHistory();
