@@ -3,10 +3,11 @@ import { Link, useHistory} from "react-router-dom";
 import {Form, Button} from 'react-bootstrap';
 
 import { Formik } from "formik";
-import {ValidationSchema} from '../schema/validation'
+import {ValidationSchema} from '../schema/Validation'
 import { AuthContext } from "../App";
 
-import { Wrapper, FormCard, Message, Heading , Group, SubmitButton, Paragraph} from "../styles/forms";
+
+import { Wrapper, FormCard, Message, Heading , Group, LoginButton, Paragraph} from "../styles/Forms";
 
 
 const Login = () => {
@@ -60,7 +61,6 @@ const Login = () => {
 			>
 		 	{( {values, errors, handleChange, handleBlur, handleSubmit, isSubmitting, isValid}) => (
 				<FormCard onSubmit={handleSubmit}>
-				{console.log("The errors", errors)}
 					<Heading>Login</Heading>
 					<Group controlId="formBasicEmail">
 						<Form.Label>Email address</Form.Label>
@@ -81,9 +81,9 @@ const Login = () => {
 							{serverErrors.errorMessage}
 						</span>
         	)}
-					<SubmitButton variant="primary" type="submit">
+					<LoginButton variant="primary" type="submit">
 						{isSubmitting ? "Signing in..." : "Login"}
-					</SubmitButton>
+					</LoginButton>
 					<Paragraph>
 						Not registered? <a href="/signup"> Signup </a>
 					</Paragraph>

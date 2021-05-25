@@ -12,16 +12,8 @@ export const Wrapper = styled.div`
 	border: 1px solid #cccccc;
 `;
 
-// export const FormWrapper = styled(Form)`
-// 	margin: 0 auto;
-// 	width: 100%;
-//   max-width: 414px;
-// 	position: relative;
-//
-// `;
-
 export const FormCard = styled(Form)`
-	width:22%;
+	width:30%;
 	border: 1px solid #cccccc;
 	border-radius: 5px;
 	padding: 40px;
@@ -38,11 +30,11 @@ export const Heading = styled.h2`
 	margin-bottom: 2rem;
 `
 export const Group = styled(Form.Group)`
-	padding: 8px 0px 8px 0px;
+	/* padding: 8px 0px 8px 0px; */
 `
 
 export const SubmitButton = styled(Button)`
-	width: 100%;
+	width:30%;
 	padding: 11px 13px;
 	border: none;
 	border-radius: 30px;
@@ -53,6 +45,17 @@ export const SubmitButton = styled(Button)`
   }
 `;
 
+export const LoginButton = styled(Button)`
+	width:100%;
+	padding: 11px 13px;
+	border: none;
+	border-radius: 30px;
+	margin-top: 1rem;
+	background: #5a05ff;
+	&:hover {
+    border-color: #727cf5;
+  }
+`;
 export const Paragraph = styled.p`
 	display: flex;
 	justify-content: center;
@@ -62,3 +65,7 @@ export const Paragraph = styled.p`
 		padding: 20px;
 	}
 `;
+
+export const Input = styled.input`
+	height: 52px;
+`
