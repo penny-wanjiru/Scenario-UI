@@ -16,7 +16,6 @@ const AddAppForm = props => {
 
 	const handleInputChange = event => {
 		const { name, value } = event.target
-
 		setApp({ ...app, [name]: value })
 	}
 

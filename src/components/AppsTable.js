@@ -38,7 +38,6 @@ const AppsTable = props => {
 	      <th>Description</th>
 	      <th>Type</th>
 				<th>Framework</th>
-				<th>Subs</th>
 				<th>Actions</th>
 	    </tr>
 	  </thead>
@@ -50,7 +49,6 @@ const AppsTable = props => {
 				<td>{app.description}</td>
 				<td>{app.type}</td>
 				<td>{app.framework}</td>
-				<td>{app.subscription}</td>
 				<td>
           <UpgradeButton
             onClick={() => {
