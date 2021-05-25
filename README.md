@@ -2,12 +2,12 @@
 
 ## Features
 
-A user can register, login, and reset their password.
-A user can create, retrieve, update, and delete applications that they own.
-A user can associate a subscription with a pricing plan (from a preconfigured list of pricing
+- A user can register, login, and reset their password.
+- A user can create, retrieve, update, and delete applications that they own.
+- A user can associate a subscription with a pricing plan (from a preconfigured list of pricing
 plans)
-A user can read the subscription details for an app.
-A user can update the pricing plan for an app, i.e. upgrade or downgrade the pricing plan.
+- A user can read the subscription details for an app.
+- A user can update the pricing plan for an app, i.e. upgrade or downgrade the pricing plan.
 
 ## Usage
 
