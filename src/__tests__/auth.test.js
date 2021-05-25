@@ -4,8 +4,6 @@ import {cleanup} from '@testing-library/react'
 import {initialState, reducer} from '../App'
 
 
-afterEach(cleanup)
-
 it('returns new state for "register" type', () => {
   const initialState = {
 	  isAuthenticated: false,
