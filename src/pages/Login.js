@@ -3,7 +3,7 @@ import { Link, useHistory} from "react-router-dom";
 import {Form, Button} from 'react-bootstrap';
 
 import { Formik } from "formik";
-import {ValidationSchema} from '../schema/validation'
+import {ValidationSchema} from '../schema/Validation'
 import { AuthContext } from "../App";
 
 

@@ -6,7 +6,7 @@ import {Input, SubmitButton} from "../../styles/forms";
 
 
 const AddAppForm = props => {
-	const { state } = React.useContext(AuthContext)
+	const { state, dispatch } = React.useContext(AuthContext)
 	const initialFormState = { name:'Example Name', description:'Example desc', type: 'Mobile', framework:'Django'}
 	const [app, setApp] = useState(initialFormState);
 	const [submitted, setSubmitted] = useState(false)

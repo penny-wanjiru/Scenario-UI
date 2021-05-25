@@ -35,7 +35,7 @@ const Dashboard = () => {
 		updateApp(id, app, key)
 		.then(res => {
 				console.log("Updated successfully", res)
-				setAddedApp(res)
+				setAddedApp(app)
 			})
 		.catch(e => {
 			setServerErrors({
@@ -49,8 +49,8 @@ const Dashboard = () => {
 		deleteApp(id, app, key)
 		.then(res => {
 				console.log("Deleted successfully", res)
-				setAddedApp(res)
-			})
+				setAddedApp(app)
+		})
 		.catch(e => {
 			setServerErrors({
 				errorStatus: e.status,

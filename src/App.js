@@ -15,33 +15,32 @@ import FourOhFour from './pages/404';
 
 export const AuthContext = React.createContext();
 
-const initialState = {
+export const initialState = {
   isAuthenticated: false,
-  user: null,
   token: null,
 };
 
-const reducer = (state, action) => {
+export const reducer = (state, action) => {
   switch (action.type) {
     case "REGISTRATION":
+			localStorage.setItem("token", JSON.stringify(action.payload.key));
       return {
         ...state,
         isAuthenticated: true,
-        user: action.payload.user,
         token: action.payload.key
       };
 		case "LOGIN":
+		 localStorage.setItem("token", JSON.stringify(action.payload.key));
       return {
         ...state,
         isAuthenticated: true,
-        user: action.payload.user,
         token: action.payload.key
       };
     case "LOGOUT":
+			localStorage.clear();
       return {
         ...state,
         isAuthenticated: false,
-        user: null,
 				token: null,
       };
     default:
@@ -51,6 +50,7 @@ const reducer = (state, action) => {
 
 const App = () => {
 	const [state, dispatch] = React.useReducer(reducer, initialState);
+
 	const Page404 = () => <h1>Four:oh:four</h1>
 
   return (
