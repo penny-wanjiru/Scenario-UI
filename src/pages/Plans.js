@@ -47,7 +47,7 @@ const Plans = (props) => {
 
 	const handleRedirect = ( ) =>{
 		history.push({
-			pathname: '/',
+			pathname: '/dashboard',
 		});
 	}
 
@@ -98,7 +98,7 @@ const Plans = (props) => {
 				<Button
 					className="button muted-button"
 					onClick={handleRedirect}>
-					Cancel
+					Back
 				</Button>
 		</Container>
 	)
