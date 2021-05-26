@@ -20,9 +20,8 @@ const Dashboard = () => {
 	const [serverErrors, setServerErrors] = useState( {errorStatus:null, errorMessage: null});
 
 	let key = state.token
-	let lenght = apps.lenght
 
-	useEffect(() => {
+	useEffect((key) => {
 		getAllApps(key)
 		.then(response => {setApps(response)})
  	}, [Object.values(apps)]);

@@ -7,11 +7,10 @@ import styled from "styled-components"
 import {Navbar, Nav} from 'react-bootstrap';
 
 
-
 export const Header = () => {
 	const history = useHistory();
 	const { state, dispatch } = React.useContext(AuthContext);
-
+	const  token = JSON.parse(localStorage.getItem('token'))
 
 	const logout = () => {
 		fetch("https://hiring-example-25770.botics.co/rest-auth/logout/", {
@@ -42,7 +41,7 @@ export const Header = () => {
 
 	return (
 		<div>
-			{state.isAuthenticated?(
+			{token?(
 				<Navbar style={{background:"#1e0a45"}}>
 					<Navbar.Brand  href="/" style={{color:"#ffffff", marginLeft:"2%"}} >Crowdbotics-Mini</Navbar.Brand>
 					<Navbar.Toggle />

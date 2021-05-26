@@ -4,10 +4,12 @@ import { AuthContext } from "../App";
 
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
 	const { state } = React.useContext(AuthContext);
+	const  token = JSON.parse(localStorage.getItem('token'))
+
   return (
     <Route {...rest} render={
       props => {
-			if (state.isAuthenticated){
+			if (token){
 				 return <Component {...rest} {...props} />
 			}
 			else {
