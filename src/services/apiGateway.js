@@ -18,7 +18,6 @@ export const apiFetchWithBody = (url, method, data, key) => {
       }
       return response;
     })
-    .then(data => data.json())
 };
 
 export const apiFetch = (url, method, key) => {
@@ -37,5 +36,22 @@ export const apiFetch = (url, method, key) => {
       }
       return response;
     })
-    .then(data => data.json())
+};
+
+export const apiFetchDel = (url, method, key) => {
+	const  token = JSON.parse(localStorage.getItem('token'))
+	const headers = {
+		"Content-type": "application/json",
+		"Authorization": `Token ${token}`,
+	}
+  return fetch(API_ROOT + url, {
+			method: method,
+			headers: headers,
+		})
+    .then(response => {
+      if (!response.ok) {
+				throw response;
+      }
+      return response;
+    })
 };

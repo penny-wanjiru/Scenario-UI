@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-ro
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {ProtectedRoute} from './components/ProtectedRoute'
-import { Header } from './components/Header';
+import Header  from './components/Header';
 import Subscription from './pages/Plans';
 import Plans from './pages/Plans';
 import Signup from './pages/Signup';
@@ -50,7 +50,6 @@ export const reducer = (state, action) => {
 
 const App = () => {
 	const [state, dispatch] = React.useReducer(reducer, initialState);
-	const Page404 = () => <h1>Four:oh:four</h1>
 
   return (
 		<AuthContext.Provider value={{state, dispatch}}>

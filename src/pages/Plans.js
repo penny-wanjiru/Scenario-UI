@@ -8,7 +8,7 @@ import {createSubscription} from '../components/forms/AddAppForm'
 import {getSubscriptionPlans, getSubscription, createSubscriptions, updateSubscription} from '../services/AppsService'
 
 const Button = styled.button`
-	 margin-left: 82%;
+	 margin-left: 85%;
 `
 const SelectButton = styled.button`
 
@@ -16,6 +16,16 @@ const SelectButton = styled.button`
 const TableWrapper = styled(Table)`
 		margin-top: 8%;
 `;
+
+const Description = styled.div`
+	margin-left:7%;
+	font-weight:500;
+	border:1px solid #cccccc;
+	border-radius:5px;
+	padding:8px;
+	width: 30%
+`
+
 
 const Plans = (props) => {
 	const history = useHistory();
@@ -31,17 +41,20 @@ const Plans = (props) => {
 
 	useEffect(() => {
 		getSubscriptionPlans(key)
+		.then(data => data.json())
 		.then(response => { setPlans(response);})
  	}, []);
 
 	useEffect(() => {
 		getSubscription(subscriptionId, key)
+		.then(data => data.json())
 		.then(response => {setCurrentPlan(response.plan)})
 	}, []);
 
 	const handleupdates = (planId, appId) => {
 		let data = {plan:planId, app: appId, active:true}
 		updateSubscription(subscriptionId, data, key)
+		.then(data => data.json())
 		.then(response => {setCurrentPlan(response.plan)})
 	}
 
@@ -53,6 +66,18 @@ const Plans = (props) => {
 
 	return (
 		<Container>
+			<Button
+				style={{marginTop:"5%"}}
+				className="button muted-button"
+				onClick={handleRedirect}>
+				Back
+			</Button>
+			{currentPlan?
+				<Description >You are currently subscribed to plan number: {currentPlan}</Description>:
+				<Description >You don't have a current subscription</Description>
+			}
+
+
 		  <Row xs={3} style={{width:"90%", marginLeft:"6%", marginTop:"10%"}} >
 				{[
 					'Light',
@@ -91,15 +116,7 @@ const Plans = (props) => {
 					))
 				))}
 				</Row>
-				{currentPlan?
-					<div style={{paddingTop:"5%", marginLeft:"6%",fontWeight:500}}>You are currently subscribed to plan number: {currentPlan}</div>:
-					<div style={{paddingTop:"5%", marginLeft:"6%", fontWeight:500}}>You don't have a current subscription</div>
-				}
-				<Button
-					className="button muted-button"
-					onClick={handleRedirect}>
-					Back
-				</Button>
+
 		</Container>
 	)
 }

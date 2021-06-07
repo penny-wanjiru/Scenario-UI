@@ -1,4 +1,4 @@
-import {apiFetch, apiFetchWithBody, apiFetchLogin} from './ApiGateway.js';
+import {apiFetch, apiFetchWithBody, apiFetchDel} from './ApiGateway.js';
 
 export const getAllApps = (key) => {
   const url = '/api/v1/apps/';
@@ -10,9 +10,9 @@ export const getApp = (id, key) => {
 	return apiFetch(url, 'get',key);
 };
 
-export const createApp = (data, key) => {
+export const createApp = (data) => {
   const url = '/api/v1/apps/';
-	return apiFetchWithBody(url, 'post', data, key);
+	return apiFetchWithBody(url, 'post', data);
 };
 
 export const updateApp = (id, data, key) => {
@@ -40,9 +40,9 @@ export const getSubscriptions = (id, key) => {
 	return apiFetch(url, 'get', key);
 };
 
-export const createSubscription = (data, key) => {
+export const createSubscription = (data) => {
   const url = '/api/v1/subscriptions/';
-	return apiFetchWithBody(url, 'post', data, key);
+	return apiFetchWithBody(url, 'post', data);
 };
 
 export const getSubscription = (id, key) => {

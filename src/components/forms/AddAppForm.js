@@ -7,12 +7,9 @@ import {Input, SubmitButton} from "../../styles/Forms";
 
 
 const AddAppForm = props => {
-	const { state, dispatch } = React.useContext(AuthContext)
 	const initialFormState = { name:'Example Name', description:'Example desc', type: 'Mobile', framework:'Django'}
 	const [app, setApp] = useState(initialFormState);
 	const [submitted, setSubmitted] = useState(false)
-
-	const key = state.token
 
 	const handleInputChange = event => {
 		const { name, value } = event.target
@@ -21,10 +18,12 @@ const AddAppForm = props => {
 
 	const saveApp = () => {
 		let data = { name: app.name, description: app.description, type:app.type , framework:app.framework}
-		createApp(data, key)
+		createApp(data)
+		.then(data => data.json())
 		.then(res => {
+			props.setCount(count => count +1)
 			let sub_data = {plan:1, app:res.id, active:true}
-			const subs = createSubscription(sub_data, key)
+			const subs = createSubscription(sub_data)
 			setSubmitted(true);
 		})
 		.catch(e => {
@@ -44,6 +43,7 @@ const AddAppForm = props => {
 							type="text"
 							className="form-control"
 							id="name"
+							data-testid="app-name"
 							required
 							value={app.name}
 							onChange={handleInputChange}
@@ -70,6 +70,7 @@ const AddAppForm = props => {
 							type="text"
 							className="form-control"
 							id="description"
+							data-testid="app-description"
 							required
 							value={app.description}
 							onChange={handleInputChange}
@@ -84,4 +85,4 @@ const AddAppForm = props => {
 	)
 }
 
-export default AddAppForm
+export default AddAppForm;
