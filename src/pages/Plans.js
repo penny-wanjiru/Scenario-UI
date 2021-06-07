@@ -41,17 +41,20 @@ const Plans = (props) => {
 
 	useEffect(() => {
 		getSubscriptionPlans(key)
+		.then(data => data.json())
 		.then(response => { setPlans(response);})
  	}, []);
 
 	useEffect(() => {
 		getSubscription(subscriptionId, key)
+		.then(data => data.json())
 		.then(response => {setCurrentPlan(response.plan)})
 	}, []);
 
 	const handleupdates = (planId, appId) => {
 		let data = {plan:planId, app: appId, active:true}
 		updateSubscription(subscriptionId, data, key)
+		.then(data => data.json())
 		.then(response => {setCurrentPlan(response.plan)})
 	}
 

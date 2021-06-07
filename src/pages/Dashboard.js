@@ -14,6 +14,7 @@ const Dashboard = () => {
 
 	// Setting state
 	const [apps, setApps] = useState([]);
+	const [count, setCount] = useState(-1);
 	const [ currentApp, setCurrentApp ] = useState(initialFormState)
 	const [ showPlans, setShowingPlans ] = useState(false)
 	const [ editing, setEditing ] = useState(false)
@@ -21,10 +22,11 @@ const Dashboard = () => {
 
 	let key = state.token
 
-	useEffect((key) => {
-		getAllApps(key)
+	useEffect(() => {
+		getAllApps()
+		.then(data => data.json())
 		.then(response => {setApps(response)})
- 	}, [Object.values(apps)]);
+ 	}, [count]);
 
 	const editRow = app => {
 		setEditing(true)
@@ -34,7 +36,7 @@ const Dashboard = () => {
 	const updateApplication = (id, app) => {
 		updateApp(id, app, key)
 		.then(res => {
-			 // return res.json();
+			setCount(count => count +1)
 			})
 		.catch(e => {
 			setServerErrors({
@@ -47,7 +49,7 @@ const Dashboard = () => {
 	const deleteApplication = (id, app) => {
 		deleteApp(id, key)
 		.then(res => {
-			return res.json();
+			setCount(count => count +1)
 		})
 		.catch(e => {
 			setServerErrors({
@@ -80,6 +82,7 @@ const Dashboard = () => {
 						<Fragment>
 							<h2>Add App</h2>
 							<AddAppForm
+								setCount={setCount}
 								setServerErrors={setServerErrors}
 							/>
 							{serverErrors.errorStatus && (

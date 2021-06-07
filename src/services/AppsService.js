@@ -1,4 +1,4 @@
-import {apiFetch, apiFetchWithBody, apiFetchLogin} from './ApiGateway.js';
+import {apiFetch, apiFetchWithBody, apiFetchDel} from './ApiGateway.js';
 
 export const getAllApps = (key) => {
   const url = '/api/v1/apps/';

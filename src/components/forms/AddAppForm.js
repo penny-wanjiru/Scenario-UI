@@ -19,7 +19,9 @@ const AddAppForm = props => {
 	const saveApp = () => {
 		let data = { name: app.name, description: app.description, type:app.type , framework:app.framework}
 		createApp(data)
+		.then(data => data.json())
 		.then(res => {
+			props.setCount(count => count +1)
 			let sub_data = {plan:1, app:res.id, active:true}
 			const subs = createSubscription(sub_data)
 			setSubmitted(true);
