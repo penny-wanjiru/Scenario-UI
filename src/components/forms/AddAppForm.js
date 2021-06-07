@@ -84,4 +84,4 @@ const AddAppForm = props => {
 	)
 }
 
-export default AddAppForm
+export default AddAppForm;
