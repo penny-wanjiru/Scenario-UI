@@ -64,17 +64,21 @@ const Login = () => {
 					<Heading>Login</Heading>
 					<Group controlId="formBasicEmail">
 						<Form.Label>Email address</Form.Label>
-						<Form.Control type="email" placeholder="Enter email" name="email" value={values.email} onChange={handleChange}/>
-						<span className="error" style={{ color: "red" }}>
+						<Form.Control type="email" placeholder="Enter email" name="email" value={values.email} data-testid="email-input" onChange={handleChange}/>
+						{errors.email?(
+							<span className="error" style={{ color: "red" }} data-testid="email-error-msg" >
               {errors.email}
-            </span>
+            	</span>
+						):(null)}
 					</Group>
 					<Group controlId="formBasicPassword">
 						<Form.Label>Password</Form.Label>
-						<Form.Control type="password" placeholder="Password" name="password" value={values.password} onChange={handleChange}/>
-						<span className="error" style={{ color: "red" }}>
-              {errors.password}
-            </span>
+						<Form.Control type="password" placeholder="Password" name="password" value={values.password} data-testid="password-input" onChange={handleChange}/>
+						{errors.password?(
+							<span className="error" style={{ color: "red" }} data-testid="pass-error-msg">
+              	{errors.password}
+            	</span>
+						):(null)}
 					</Group>
 					{serverErrors.errorStatus && (
             <span className="form-error" style={{ color: "red" }} >

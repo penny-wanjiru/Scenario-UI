@@ -6,8 +6,7 @@ import { AuthContext } from "../App";
 import styled from "styled-components"
 import {Navbar, Nav} from 'react-bootstrap';
 
-
-export const Header = () => {
+const Header = () => {
 	const history = useHistory();
 	const { state, dispatch } = React.useContext(AuthContext);
 	const  token = JSON.parse(localStorage.getItem('token'))
@@ -59,3 +58,5 @@ export const Header = () => {
 	</div>
 	)
 };
+
+export default Header;
